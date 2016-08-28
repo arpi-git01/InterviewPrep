@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 /* http://cs.lmu.edu/~ray/notes/queues/
  * 
  * A queue is a linear DS where elements are inserted at rear(last) position and 
@@ -97,10 +99,8 @@ public class QueueUsingArr {
 	 * peek: return the item at the head/front (without removing it)
 	 */
 	public int peek(){
-		if(front == -1){
-			System.err.println("No element in the queue");
-			return Integer.MAX_VALUE;
-		}
+		if(front == -1)
+			throw new NoSuchElementException("No elements in Queue");
 		else
 			return queue[front];
 	}
@@ -133,7 +133,7 @@ public class QueueUsingArr {
 	}
 	
 	/**
-	 * 
+	 * Display elements in queue with font and rear positioning
 	 * @param args
 	 */
 	public void display(){
