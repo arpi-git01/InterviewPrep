@@ -10,7 +10,6 @@
  * 2. Then a sorted array is created by repeatedly removing the largest/smallest element from the heap, and inserting it into the array. 
  *    The heap is reconstructed after each removal.
  * 
- * 
  * Complexity ->
  * Worst case performance : O(n log n)
  * Best case performance : O(n log n)
@@ -84,8 +83,6 @@ public class HeapSort {
 	}
 	
 	public void printArray(int[] inputArr){
-		
-		System.out.println("\n\n");
 		System.out.print("[");
 		for(int i=0; i<inputArr.length; i++)
 			System.out.print("  "+inputArr[i]+"  ");	
@@ -105,9 +102,12 @@ public class HeapSort {
 	
 	public static void main(String args[]){
 		HeapSort hs = new HeapSort();
+		System.out.println("Unsorted");
 		hs.printArray(hs.input);
 		int[] heaped = hs.createHeap(hs.input);
 		hs.sortHeap(hs.input, 0, hs.input.length-1);
+		System.out.println("\n");
+		System.out.println("\nSorted");
 		hs.printArray(hs.input);	
 	}
 }
