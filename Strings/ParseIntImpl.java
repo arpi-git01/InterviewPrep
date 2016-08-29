@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class ParseIntImpl {
 
 	/**
-	 * 
 	 * @param s - String to be converted to int
 	 * @return - int value out of string
 	 * @implementation - find that the input you are entering should not exceed the ascii value 57 and should not be less than 48,
