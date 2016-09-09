@@ -131,7 +131,26 @@ public class BST {
 
 		return node;
 	}
-	
+
+	public String depthOfNode(BSTNode cur, BSTNode search, int[] depth) {
+		if(cur == null)
+			return "Not Found";
+		if (cur == search)
+			return "Found";
+		int temp = depth[0];
+		depth[0] += 1;
+		String found = depthOfNode(cur.left, search, depth);
+		if (found == "Not Found") {
+			depth[0] = temp;
+			depth[0] += 1;
+			found = depthOfNode(cur.right, search, depth);
+			if (found == "Found")
+				return "Found";
+		} else {
+			return "Found";
+		}
+		return "Not Found";
+	}
 	
 	public boolean depthFirstSearch(BSTNode root, int val){
 		
@@ -310,10 +329,12 @@ public class BST {
 		obj.root = obj.insertNodeBST(obj.root,new BSTNode(99));
 		obj.root = obj.insertNodeBST(obj.root,new BSTNode(42));
 		obj.root = obj.insertNodeBST(obj.root,new BSTNode(90));
-		obj.root = obj.insertNodeBST(obj.root,new BSTNode(105));
+		BSTNode n = new BSTNode(105);
+		obj.root = obj.insertNodeBST(obj.root,n);
 		obj.root = obj.insertNodeBST(obj.root,new BSTNode(58));
 		obj.root = obj.insertNodeBST(obj.root,new BSTNode(32));
-		obj.root = obj.insertNodeBST(obj.root,new BSTNode(68));
+		BSTNode p = new BSTNode(68);
+		obj.root = obj.insertNodeBST(obj.root,p);
 		obj.root = obj.insertNodeBST(obj.root,new BSTNode(43));
 		obj.root = obj.insertNodeBST(obj.root,new BSTNode(60));
 		obj.root = obj.insertNodeBST(obj.root,new BSTNode(70));
@@ -352,6 +373,13 @@ public class BST {
 
 		obj.root = obj.deleteNodeBST(obj.root,105);
 		obj.printBST(obj.root,0);
+		
+		
+		//return depth of a node 105
+		int d[] = new int[]{0};
+		obj.depthOfNode(obj.root, p, d);
+		System.out.println("Depth of the ndoe is:"+d[0]);
+		
 		
 	} //end of main
 	
