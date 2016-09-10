@@ -101,7 +101,7 @@ public class BT {
 	//Use a queue
 	
 
-	public void bredthFirstSearch(BTNode root){
+	public void bredthFirstTraversal(BTNode root){
 		Queue<BTNode> q = new LinkedList<BTNode>();  //Take a Empty Queue.
 		if(root == null) return;		//If root is empty, no further processing
 		q.add(root);					//Start from the root, insert the root into the Queue
@@ -148,7 +148,7 @@ public class BT {
 		obj.postOrderTraversal(obj.root);
 		System.out.println("\n");
 		System.out.println("BFS - Level order traversal: ");
-		obj.bredthFirstSearch(obj.root);
+		obj.bredthFirstTraversal(obj.root);
 	}
 
 }
