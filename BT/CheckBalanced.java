@@ -4,32 +4,24 @@
 
 public class CheckBalanced {
 
-	public CheckBalanced() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public int checkHeight(BTNode root){
-		
-		if(root == null){
-			return -1;
+	public int height(BTNode root){ //returns height of a node in tree
+		if(root == null)
+			return 0;
+		else{
+			return Math.max(height(root.left), height(root.right))+1;
+			//Recursively calculate height of left and right subtrees of a node 
+			//and return max of the heights of two children plus 1
 		}
-		
-		int htLeftTree = 1 + checkHeight(root.left) ;
-		int htRightTree = 1 + checkHeight(root.right);
-		int htDiff = Math.abs(htLeftTree-htRightTree);
-		
-		if(htDiff > 1){
-			return Integer.MIN_VALUE;
-		}
-		return Math.max(htLeftTree,htRightTree);
 	}
 	
-	public boolean checkBalanced(BTNode root){
-		int ht = this.checkHeight(root);
-		if(ht == Integer.MIN_VALUE)
-			return false;
-		else
+	public boolean isBalanced(BTNode root){
+		if(root == null)
 			return true;
+		int leftHeight = height(root.left);
+		int rightHeight = height(root.right);
+		if (Math.abs(leftHeight-rightHeight)<=1 && isBalanced(root.left) && isBalanced(root.right))
+			return true;
+		return false;
 	}
 	
 	public static void main(String args[]){
@@ -37,7 +29,7 @@ public class CheckBalanced {
 		bt.createSampleTree();
 		BTNode root = bt.root; //contains root of sample Binary Tree
 		CheckBalanced chk = new CheckBalanced();
-		System.out.println(chk.checkBalanced(root));
+		System.out.println(chk.isBalanced(root));
 		
 	}
 }
