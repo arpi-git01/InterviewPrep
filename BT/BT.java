@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
 /*
  * Tree :-> 
 5 
@@ -91,6 +94,28 @@ public class BT {
 		System.out.print(root.data + "\t");
 	}
 	
+	//DFS - inorder,preorder,postorder
+	
+	//BFS - This level-by-level traversal is called a breadth-first traversal because we explore the breadth, 
+	//i.e., full width of the tree at a given level, before going deeper.
+	//Use a queue
+	
+
+	public void bredthFirstSearch(BTNode root){
+		Queue<BTNode> q = new LinkedList<BTNode>();  //Take a Empty Queue.
+		if(root == null) return;		//If root is empty, no further processing
+		q.add(root);					//Start from the root, insert the root into the Queue
+		
+		while(!q.isEmpty()){			//Now while Queue is not empty
+			BTNode n = q.remove();		//Extract the node from the Queue
+			System.out.print(n.data+ " "); //Print the extracted node.
+			if(n.left != null) 			// insert all its chil­dren into the Queue
+				q.add(n.left);
+			if(n.right != null) 
+				q.add(n.right);
+		}
+	}
+	
 	
 	public void printTree(BTNode rootNode, int count){
 		
@@ -121,6 +146,9 @@ public class BT {
 		System.out.println("\n");
 		System.out.println("Post order traversal: ");
 		obj.postOrderTraversal(obj.root);
+		System.out.println("\n");
+		System.out.println("BFS - Level order traversal: ");
+		obj.bredthFirstSearch(obj.root);
 	}
 
 }
