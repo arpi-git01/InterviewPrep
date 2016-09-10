@@ -64,50 +64,31 @@ public class BST {
 			System.out.println("Tree is already empty !! Cannot delete !!");
 		}
 		else if(newNode.left != null && newNode.right != null && root!=null){
-			
 			//if both the children are present
 			//place predecessor of the node at its place and delete the value
 			//predecessor of a node = rightmost value in the left subtree
 			
 			BSTNode currNode = newNode.left;
-			
-			while(currNode != null){
+			while(currNode != null)				//find predec	
 				currNode = currNode.right;
-			}
 			
-			if(currNode.left == null){
-					
-				//if predec is a leaf, just go on
-				newNode.data = currNode.data;	
-				
-			} else{
-				
-				//if predec is not a leaf, then we have to take care of its left child
+			if(currNode.left == null)			 //if predec is a leaf, just go on
+				newNode.data = currNode.data;			
+			else{								//if predec is not a leaf, then we have to take care of its left child
 				newNode.data = currNode.data;
 				deleteNodeBST(root, newNode.data);
 			}
 			
-		}else if(newNode.left != null || newNode.right != null){
-			
-			//if there is only 1 child of the node to be deleted, make the child as the node
-			
-			if(newNode.left != null){
+		}else if(newNode.left != null || newNode.right != null){ //if there is only 1 child
+			 													//make the child as the node
+			if(newNode.left != null)
 				newNode = newNode.left;
-			} else{
+			else
 				newNode = newNode.right;	
-			}
-	
-		}else{
-			
-			//newNode = returnNode(root, newNode.data);
-			
+		}else{									//it is leaf
 			System.out.println(newNode.data+" is a leaf node. Let us delete it ");
-			//if it is a leaf-node, happily remove it - without doing it
-			newNode = null;
-			//System.out.println("After deletion: "+newNode.data);
-			
+			newNode = null;	
 		}
-		
 		return root;
 	}//end of insertNodeBST()
 	
@@ -174,18 +155,14 @@ public class BST {
 	public boolean breadthFirstSearch(BSTNode root, int val, Queue<BSTNode> q){
 		
 		boolean found = false;
-		
 		if(root.data == val){
 				found = true;
 				return found;
 		}
 		else if(root != null){
-
-			if(q.peek() != null){
-				//if value does not match, remove that root from queue
+			if(q.peek() != null){ //if value does not match, remove that root from queue		
 				q.remove();
 			}
-			
 			//add the child of the removed BSTNode(root) to queue
 			if(root.left != null) { 
 				q.add(root.left);
