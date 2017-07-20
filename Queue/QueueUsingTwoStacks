@@ -1,0 +1,79 @@
+import java.util.Stack;
+
+public class QueueUsingTwoStacks {
+
+	Stack<Integer> st1;
+	Stack<Integer> st2;
+	
+	QueueUsingTwoStacks(){
+		this.st1 = new Stack<Integer>();
+		this.st2 = new Stack<Integer>();
+	}
+	
+	//add
+	public Stack<Integer> addElement(int elem){
+		
+		//1. move current stack1 to stack2
+		while(!st1.isEmpty()){
+			st2.push(st1.pop());
+		}
+		
+		//2. insert new element in stack1
+		st1.add(elem);
+
+		//3. move stack2 back to stack1
+		while(!st2.isEmpty()){
+			st1.push(st2.pop());
+		}
+		
+		return st1;
+	}
+	
+	//delete
+	public Stack<Integer> deleteElement(){
+		int elem = st1.pop();
+		return st1;
+	}
+	
+	//peek
+	public int topElement(){
+		return st1.peek();
+	}
+	
+	//size
+	public int sizeOfQueue(){
+		return st1.size();
+	}
+	
+	//print
+	public void printStack(){
+		for(Integer i: st1){
+			System.out.print(i+"  ");
+		}
+		System.out.println("");
+	}
+	
+	public static void main(String args[]){
+		QueueUsingTwoStacks q = new QueueUsingTwoStacks();
+		Stack<Integer> result = new Stack<Integer>();
+		
+		//insert elements
+		for(int i=1; i<=10; i++){
+			result = q.addElement(i);
+			q.printStack();
+		}
+		
+		q.deleteElement();
+		q.deleteElement();
+		
+		q.printStack();
+		
+		q.addElement(11);
+		q.addElement(12);
+		
+		q.printStack();
+		
+		
+	}
+	
+}
