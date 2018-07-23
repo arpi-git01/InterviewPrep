@@ -1,5 +1,10 @@
 package Heap;
 
+
+/*
+ * https://www.youtube.com/watch?v=t0Cq6tVNRBA&t=4s
+ */
+
 import java.util.Arrays;
 
 public class MinHeap {
@@ -14,8 +19,7 @@ public class MinHeap {
 	//dispalys the top most element in heap - minimum elem
 	public int peek(){
 		if(size == 0) throw new IllegalStateException();
-		else return items[0];
-		
+		else return items[0];	
 	}
 	
 	
@@ -26,14 +30,60 @@ public class MinHeap {
 	public int poll(){
 		if(size == 0) throw new IllegalStateException();
 		int item = items[0];
-		items[0]= items[capacity-1];
+		items[0]= items[size-1];
+		size--;
 		heapifyDown();
 		return item;
-		
 	}
 	
+	/**
+	 * @return the item that is added
+	 * @param item
+	 * Adds an item to the heap, by adding it at last position and heapifying up to place in proper position
+	 */
+	public void add(int item){
+		ensureExtraCapaity();
+		items[size] = item;
+		size++;
+		heapifyUp();
+	}
 	
+	/*
+	 * places the element to the correct location by looking heap up from bottom
+	 * item to be heapified is compared with the parent and swapped is parent is bigger than the item and so on until there is no parent 
+	 */
+	public void heapifyUp(){
+		int index = size-1;
+		while(hasParent(index) && items[index] < items[getParent(index)]){
+			swap(getParentIndex(index), index);
+			index = getParentIndex(index);
+		}
+	}
 	
+	/*
+	 * places the element to the correct location by looking heap bottom from root
+	 * item to be heapified is compared with the childs and swapped
+	 */
+	public void heapifyDown(){
+		int index = 0;
+		while(hasLeftChild(index)){
+			
+			int smallerChildIndex = getLeftChildIndex(index);
+			if( hasRightChild(index) && getRightChildIndex(index) < getLeftChild(index)){
+				//if right child is smaller than left child
+				smallerChildIndex = getRightChildIndex(index);
+			}
+			
+			
+			if(items[index] < items[smallerChildIndex])
+				break;
+			else
+				swap(index, smallerChildIndex);
+			
+			index=smallerChildIndex;
+			
+		}
+	}
 	
 	
 	
@@ -75,7 +125,7 @@ public class MinHeap {
 		items[indexTwo] = temp;
 	}
 	
-	private void ensureExtraCapacity(){
+	private void ensureExtraCapaity(){
 		if(size==capacity){
 			items = Arrays.copyOf(items, capacity*2);
 			capacity = capacity*2;
