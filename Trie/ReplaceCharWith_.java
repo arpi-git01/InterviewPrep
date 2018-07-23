@@ -14,13 +14,14 @@ public class ReplaceCharWith_ {
 	
 	
 	public ReplaceCharWith_() {
+		TrieHM trie = new TrieHM();
 		badwords = new ArrayList<String>();
 		BufferedReader br = null;
 		try{
 			String sCurrentLine;
 			br = new BufferedReader(new FileReader("NegWordsList.txt"));
 			while ((sCurrentLine = br.readLine()) != null) 
-				badwords.add(sCurrentLine);
+				trie.insert(sCurrentLine);
 		}
 		catch (IOException e){
 			e.printStackTrace();

@@ -113,7 +113,15 @@ public class BST {
 		}
 		return "Not Found";
 	}
-	
+
+	public String nthHighest(BSTNode cur, int N, int[] indx) {
+
+		if(cur == null)
+			return "Not Done";
+
+		return null;
+	}
+
 	public boolean depthFirstSearch(BSTNode root, int val){	
 		boolean found = false;
 		if(root.data == val){
@@ -181,9 +189,7 @@ public class BST {
  */
 	 
 	public void printBST(BSTNode root, int count){
-		
 		if(root == null){
-			
 			for(int i=0; i< count; i++){
 				System.out.print("\t");
 			}
