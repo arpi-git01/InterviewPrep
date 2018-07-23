@@ -9,6 +9,10 @@ public class UniqueNumbers {
 			if(!hs.contains(i)){
 				hs.add(i);
 				System.out.println(i);
+			}
+                        else{
+                                //remove from hashset
+                                hs.remove(i);
 			}	
 		}
 	}

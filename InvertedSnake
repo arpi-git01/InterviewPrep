@@ -1,0 +1,67 @@
+package MatrixProblems;
+
+import java.util.Arrays;
+
+/*
+0	9	10	19	20
+1	8	11	18	21
+2	7	12	17	22
+3	6	13	16	23
+4	5	14	15	24
+ */
+   
+
+/*
+ Bruteforce:
+ a. column odd - add values
+ b. column even - delete values
+ c. have row 1 as the base values
+ */
+
+
+public class InvertedSnake {
+
+	int[][] baseArray = new int[5][5];
+	
+	InvertedSnake(){
+		baseArray[0][0] = 0;
+		baseArray[0][1] = 9;
+		baseArray[0][2] = 10;
+		baseArray[0][3] = 19;
+		baseArray[0][4] = 20;
+	}
+	
+	public int[][] createSnake(){	
+		baseArray = this.baseArray;
+		
+		for(int i=1; i<5; i++){ //starting from 2nd row
+			for(int j=0; j<5; j++){ //starting from 1st column
+				
+				if(j%2==0){ //even column no
+					baseArray[i][j] = baseArray[i-1][j]+1;
+				}
+				else{ //odd column no
+					baseArray[i][j] = baseArray[i-1][j]-1;
+				}		
+			}
+			
+		}
+		return baseArray;
+	}
+	
+	//Displays a 2d array in the console, one line per row.
+	static void printMatrix(int[][] grid) {
+	    for(int r=0; r<grid.length; r++) {
+	       for(int c=0; c<grid[r].length; c++)
+	           System.out.print(grid[r][c] + " ");
+	       System.out.println();
+	    }
+	}
+	
+	public static void main(String args[]){
+		InvertedSnake obj = new InvertedSnake();
+		int[][] result = obj.createSnake();
+		obj.printMatrix(result);
+	}
+	
+}
